@@ -28,7 +28,7 @@ const reviewGenerator = function (numberOfData) {
 
     //profile pic
     from = 0;
-    to = 99;
+    to = 499;
     const profilePicNum = casual.integer(from, to);
     curData.profilePicNum = profilePicNum;
 

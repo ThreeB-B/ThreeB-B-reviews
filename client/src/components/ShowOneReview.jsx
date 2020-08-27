@@ -58,9 +58,8 @@ class ShowOneReview extends React.Component {
   }
 
   render() {
-    let gender = this.props.review.gender === 1 ? 'men' : 'women';
     let profilePicNum = this.props.review.profilePicNum;
-    let url = `https://s3.us-east-2.amazonaws.com/wtsesun/fakeprofilepics/${gender}/${profilePicNum}.jpg`;
+    let url = `https://sdc-profiles.s3-us-west-2.amazonaws.com/${profilePicNum}.jpg`;
     return (
       <div className={style.review} key={this.props.review.id}>
         <div className={style.pictureNameAndDate}>

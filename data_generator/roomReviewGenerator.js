@@ -5,10 +5,18 @@
  */
 
 const casual = require('casual');
-const { reviewGenerator } = require('./reviewGenerator.js');
+const { reviews } = require('./reviewGenerator.js');
 
 module.exports.roomReviewGenerator = function (room_id) {
   let numOfReviews = casual.integer(from = 1, to = 25);
+  let roomReviews = [];
 
-  return { room_id, reviews: reviewGenerator(numOfReviews) };
+  for (let i = 0; i < numOfReviews; i++) {
+    let index = casual.integer(0, 999);
+    let review = reviews[index]
+    review.id = i + 1;
+    roomReviews.push(review);
+  }
+
+  return { room_id, reviews: roomReviews };
 };

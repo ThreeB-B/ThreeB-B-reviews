@@ -13,9 +13,6 @@ const reviewGenerator = function (numberOfData) {
   for (let i = 0; i < numberOfData; i++) {
     const curData = {};
 
-    //id
-    const id = i+1;
-    curData.id = id;
     // name
     const name = casual.first_name;
     curData.name = name;
@@ -82,4 +79,4 @@ const reviewGenerator = function (numberOfData) {
 };
 
 
-module.exports = { reviewGenerator };
+module.exports.reviews = reviewGenerator(1000);

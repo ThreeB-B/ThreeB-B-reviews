@@ -1,8 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 const { roomReviewGenerator } = require('./roomReviewGenerator');
 
+const WRITE_PATH = path.resolve(__dirname, "data");
+
 let failed = false;
-const writeable = fs.createWriteStream('./bigDataSet.json');
+const writeable = fs.createWriteStream(`${WRITE_PATH}/bigDataSet.json`);
 writeable.on('error', (err) => {
   failed = true;
   console.log(err);

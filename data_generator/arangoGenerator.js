@@ -4,15 +4,18 @@ const { roomReviewGenerator } = require('./roomReviewGenerator');
 
 const WRITE_PATH = path.resolve(__dirname, "data");
 
-let failed = false;
-const writeable = fs.createWriteStream(`${WRITE_PATH}/bigDataSet.json`);
-writeable.on('error', (err) => {
-  failed = true;
-  console.log(err);
-});
+
 
 module.exports.bigDataGenerator = async (times) => {
-  writeable.write('{')
+  let failed = false;
+  let hasSpace = true;
+  const writeable = fs.createWriteStream(`${WRITE_PATH}/arangoData.json`);
+  writeable.on('error', (err) => {
+    failed = true;
+    console.log(err);
+  });
+  
+  writeable.write('[')
   for(let i = 0; i < times; i++) {
     if (failed) {
       break;
@@ -22,15 +25,19 @@ module.exports.bigDataGenerator = async (times) => {
       console.log(`Completed ${i} records.`);
     }
 
-    let hasSpace = writeable.write(`\n"${i}":${JSON.stringify(roomReviewGenerator(i))},`);
+    if (i === times - 1) {
+      hasSpace = writeable.write(`\n${JSON.stringify(roomReviewGenerator(i))}`);
+    } else {
+      hasSpace = writeable.write(`\n${JSON.stringify(roomReviewGenerator(i))},`);
+    }
     if (!hasSpace) {
       await new Promise((resolve, reject) => writeable.once('drain', resolve));
     }
   }
 
-  writeable.write('\n}');
+  writeable.write('\n]');
   writeable.end();
   console.log(`Generated ${times} records.`)
 };
 
-module.exports.bigDataGenerator(100);
+module.exports.bigDataGenerator(10000000);

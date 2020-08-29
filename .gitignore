@@ -2,3 +2,7 @@
 /package-lock.json
 /.vscode/
 /aws-key/
+
+## Data Gen ##
+/data_generator/data
+/data_generator/photos/images

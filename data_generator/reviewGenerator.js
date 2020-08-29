@@ -6,75 +6,68 @@
  */
 
 const casual = require('casual');
+const { users } = require('./userGenerator');
+const { sentences } = require('./sentenceGenerator');
 
 const reviewGenerator = function (numberOfData) {
   let res = [];
+  const months = ["July", "August", "September"];
+  const stars = [1, 2, 3, 4, 5];
+  const starIndexFrom = 0;
+  const starIndexTo = 4;
 
   for (let i = 0; i < numberOfData; i++) {
     const curData = {};
+    let sentenceIndex = casual.integer(0,999);
+    let userIndex = casual.integer(0,999);
+    let { name, profilePicNum } = users[userIndex];
 
-    //id
-    const id = i+1;
-    curData.id = id;
     // name
-    const name = casual.first_name;
     curData.name = name;
 
-    //gender 0:women 1:men
-    let from = 0;
-    let to = 1;
-    const gender = casual.integer(from, to);
-    curData.gender = gender;
-
-    //profile pic
-    from = 0;
-    to = 99;
-    const profilePicNum = casual.integer(from, to);
+    // profilePicNum
     curData.profilePicNum = profilePicNum;
 
     // date
-    let formate = 'MMMM YYYY';
-    const date = casual.date(formate);
-    curData.date = date;
+    let monthIndex = casual.integer(0, 2);
+    let month = months[monthIndex]
+    curData.date = `${month} 2020`;
 
     // sentence
-    const sentence = casual.text;
-    curData.sentence = sentence;
+    curData.sentence = sentences[sentenceIndex];
 
     // rating_accuracy
-    from = 0;
-    to = 5;
-    const accuracy_rating = casual.double(from, to).toFixed(1);
-    curData.accuracy_rating = Number(accuracy_rating);
+    let ratingIndex = casual.integer(starIndexFrom, starIndexTo);
+    curData.accuracy_rating = stars[ratingIndex];
 
     // rating_communication
-    const communication_rating = casual.double(from, to).toFixed(1);
-    curData.communication_rating = Number(communication_rating);
+    ratingIndex = casual.integer(starIndexFrom, starIndexTo);
+    curData.communication_rating = stars[ratingIndex];
 
     // rating_cleanliness
-    const cleanliness_rating = casual.double(from, to).toFixed(1);
-    curData.cleanliness_rating = Number(cleanliness_rating);
+    ratingIndex = casual.integer(starIndexFrom, starIndexTo);
+    curData.cleanliness_rating = stars[ratingIndex];
 
     // rating_location
-    const location_rating = casual.double(from, to).toFixed(1);
-    curData.location_rating = Number(location_rating);
+    ratingIndex = casual.integer(starIndexFrom, starIndexTo);
+    curData.location_rating = stars[ratingIndex];
 
     // rating_check_in
-    const check_in_rating = casual.double(from, to).toFixed(1);
-    curData.check_in_rating = Number(check_in_rating);
+    ratingIndex = casual.integer(starIndexFrom, starIndexTo);
+    curData.check_in_rating = stars[ratingIndex];
 
     // rating_value
-    const value_rating = casual.double(from, to).toFixed(1);
-    curData.value_rating = Number(value_rating);
+    ratingIndex = casual.integer(starIndexFrom, starIndexTo);
+    curData.value_rating = stars[ratingIndex];
 
     // overall_rating = ratings above / 6
-    curData.overall_rating = Number(((curData.accuracy_rating
-       + curData.communication_rating
-       + curData.cleanliness_rating
-       + curData.location_rating
-       + curData.check_in_rating
-       + curData.value_rating) / 6)
-      .toFixed(1));
+    ratingIndex = Math.floor((curData.accuracy_rating
+      + curData.communication_rating
+      + curData.cleanliness_rating
+      + curData.location_rating
+      + curData.check_in_rating
+      + curData.value_rating) / 6);
+    curData.overall_rating = stars[ratingIndex];
     res.push(curData);
   }
 
@@ -82,4 +75,4 @@ const reviewGenerator = function (numberOfData) {
 };
 
 
-module.exports = { reviewGenerator };
+module.exports.reviews = reviewGenerator(1000);

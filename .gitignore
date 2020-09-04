@@ -6,3 +6,4 @@
 ## Data Gen ##
 /data_generator/data
 /data_generator/photos/images
+/database/config.js

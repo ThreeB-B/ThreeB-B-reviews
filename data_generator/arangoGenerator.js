@@ -9,13 +9,13 @@ const WRITE_PATH = path.resolve(__dirname, "data");
 module.exports.bigDataGenerator = async (times) => {
   let failed = false;
   let hasSpace = true;
-  const writeable = fs.createWriteStream(`${WRITE_PATH}/arangoData.json`);
+  const writeable = fs.createWriteStream(`${WRITE_PATH}/arangoTest.json`);
   writeable.on('error', (err) => {
     failed = true;
     console.log(err);
   });
   
-  writeable.write('[')
+  // writeable.write('[')
   for(let i = 0; i < times; i++) {
     if (failed) {
       break;
@@ -25,17 +25,18 @@ module.exports.bigDataGenerator = async (times) => {
       console.log(`Completed ${i} records.`);
     }
 
-    if (i === times - 1) {
-      hasSpace = writeable.write(`\n${JSON.stringify(roomReviewGenerator(i))}`);
+    if (i === 0) {
+      hasSpace = writeable.write(`${JSON.stringify(roomReviewGenerator(i))}`);
     } else {
-      hasSpace = writeable.write(`\n${JSON.stringify(roomReviewGenerator(i))},`);
+      hasSpace = writeable.write(`\n${JSON.stringify(roomReviewGenerator(i))}`);
     }
     if (!hasSpace) {
       await new Promise((resolve, reject) => writeable.once('drain', resolve));
     }
   }
 
-  writeable.write('\n]');
+  // writeable.write('\n]');
+  writeable.write(`\n`);
   writeable.end();
   console.log(`Generated ${times} records.`)
 };

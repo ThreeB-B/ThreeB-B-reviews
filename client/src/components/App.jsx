@@ -32,7 +32,6 @@ class App extends React.Component {
       .then(({ data }) => {
         const { reviews } = data;
 
-        console.log(`Response: ${JSON.stringify(reviews)}`)
         this.dataSlicer(reviews);
         this.setState({
           original_data: reviews,

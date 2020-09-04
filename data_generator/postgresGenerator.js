@@ -115,6 +115,7 @@ const generateReviews = (times) => {
 
       for(let j = 0; j < reviewCount; j++, totalReviews++) {
         const reviewIndex = Math.floor(Math.random() * 1000);
+        const userId = Math.floor(Math.random() * 10000000);
         const { 
           date, 
           sentence,
@@ -127,7 +128,7 @@ const generateReviews = (times) => {
           overall_rating 
         } = reviews[reviewIndex];
 
-        hasSpace = writeable.write(`\n${totalReviews},${i},${i},${accuracy_rating},${communication_rating},${cleanliness_rating},${location_rating},${check_in_rating},${value_rating},${overall_rating},${date},${sentence}`);
+        hasSpace = writeable.write(`\n${totalReviews},${i},${userId},${accuracy_rating},${communication_rating},${cleanliness_rating},${location_rating},${check_in_rating},${value_rating},${overall_rating},${date},${sentence}`);
 
         if (!hasSpace) {
           await new Promise((resolve, reject) => writeable.once('drain', resolve));

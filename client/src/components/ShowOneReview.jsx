@@ -58,7 +58,7 @@ class ShowOneReview extends React.Component {
   }
 
   render() {
-    let profilePicNum = this.props.review.profilePicNum;
+    let profilePicNum = this.props.review.profilepicnum;
     let url = `https://sdc-profiles.s3-us-west-2.amazonaws.com/${profilePicNum}.jpg`;
     return (
       <div className={style.review} key={this.props.review.id}>

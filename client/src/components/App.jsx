@@ -5,6 +5,8 @@ import ReviewRender from './ReviewRender.jsx';
 import RatingStar from './RatingStar.jsx'
 import React from 'react';
 
+const id = window.location.pathname;
+
 import style from '../../dist/style.css';
 class App extends React.Component {
   constructor(props) {
@@ -26,17 +28,19 @@ class App extends React.Component {
 
   // fetch data while enter the website
   componentDidMount() {
-    axios.get(`/reviews/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`)
-      .then((response) => {
-        this.dataSlicer(response.data[0].reviews);
+    axios.get(`/reviews${id}`)
+      .then(({ data }) => {
+        const { reviews } = data;
+
+        this.dataSlicer(reviews);
         this.setState({
-          original_data: response.data[0].reviews,
-          num_reviews: response.data[0].reviews.length,
+          original_data: reviews,
+          num_reviews: reviews.length,
         });
-        this.findOverallRating(response.data[0].reviews);
+        this.findOverallRating(reviews);
       })
-      .catch(() => {
-        console.log("error");
+      .catch((err) => {
+        console.log(err);
       });
 
   };

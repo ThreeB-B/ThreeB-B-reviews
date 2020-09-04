@@ -100,7 +100,7 @@ const generateReviews = (times) => {
       reject();
     });
 
-    writeable.write(`id,date,sentence,accuracy_rating,communication_rating,cleanliness_rating,location_rating,check_in_rating,value_rating,overall_rating,user_id,room_id`);
+    writeable.write(`id,room_id,user_id,accuracy_rating,communication_rating,cleanliness_rating,location_rating,check_in_rating,value_rating,overall_rating,date,sentence`);
     
     for(let i = 0; i < times; i++) {
       const reviewCount = Math.floor(Math.random() * 25);
@@ -127,12 +127,14 @@ const generateReviews = (times) => {
           overall_rating 
         } = reviews[reviewIndex];
 
-        hasSpace = writeable.write(`\n${totalReviews},${date},${sentence},${accuracy_rating},${communication_rating},${cleanliness_rating},${location_rating},${check_in_rating},${value_rating},${overall_rating},${i},${i}`);
+        hasSpace = writeable.write(`\n${totalReviews},${i},${i},${accuracy_rating},${communication_rating},${cleanliness_rating},${location_rating},${check_in_rating},${value_rating},${overall_rating},${date},${sentence}`);
 
         if (!hasSpace) {
           await new Promise((resolve, reject) => writeable.once('drain', resolve));
         }
       }
+
+      console.log(`Created ${totalReviews} total reviews.`);
     }
 
     console.log('Completed generating records for users table')

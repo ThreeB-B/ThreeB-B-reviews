@@ -1,13 +1,13 @@
 const express = require('express');
+require('newrelic');
 const morgan = require('morgan');
-const path = require('path');
 const { getReviews } = require('./controllers/getReviews');
 
 const app = express();
 const PORT = 3004;
 
 app.use('/:id', express.static(`${__dirname}/../client/dist`));
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 app.get('/reviews/:room_id', async (req, res) => {
   const { room_id } = req.params;

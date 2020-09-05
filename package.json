@@ -22,11 +22,13 @@
     "express": "^4.16.4",
     "mongoose": "^5.5.8",
     "morgan": "^1.10.0",
+    "newrelic": "^6.13.0",
     "pg": "^8.3.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-highlight-words": "^0.16.0",
-    "react-promise": "^3.0.2"
+    "react-promise": "^3.0.2",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

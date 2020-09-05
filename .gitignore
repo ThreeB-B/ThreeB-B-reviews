@@ -7,3 +7,7 @@
 /data_generator/data
 /data_generator/photos/images
 /database/config.js
+
+## New Relic ##
+newrelic.js
+newrelic_agent.log

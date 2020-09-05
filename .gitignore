@@ -2,6 +2,7 @@
 /package-lock.json
 /.vscode/
 /aws-key/
+.env
 
 ## Data Gen ##
 /data_generator/data
@@ -11,3 +12,6 @@
 ## New Relic ##
 newrelic.js
 newrelic_agent.log
+
+## zip folder ##
+to_zip

@@ -8,30 +8,30 @@ require('newrelic');
 const app = express();
 const PORT = 3004;
 
-const cacheDb = redis.createClient();
+// const cacheDb = redis.createClient({ host: process.env.REDIS_URL, port: process.env.REDIS_PORT });
 
-const redisGet = promisify(cacheDb.get).bind(cacheDb);
-const redisSet = promisify(cacheDb.setex).bind(cacheDb);
+// const redisGet = promisify(cacheDb.get).bind(cacheDb);
+// const redisSet = promisify(cacheDb.setex).bind(cacheDb);
 
-const cache = async (req, res, next) => {
-  const reqPath = req.originalUrl;
-  const body = await redisGet(reqPath)
+// const cache = async (req, res, next) => {
+//   const reqPath = req.originalUrl;
+//   const body = await redisGet(reqPath)
 
-  if (body) {
-    res.send(body);
-    return;
-  } else {
-    res.sendResponse = res.send;
-    res.send = (body) => {
-      redisSet(reqPath, 60, JSON.stringify(body))
-        .catch((err) => {
-          console.log(err);
-        });
-      res.sendResponse(body);
-    }
-    next();
-  }
-}
+//   if (body) {
+//     res.send(body);
+//     return;
+//   } else {
+//     res.sendResponse = res.send;
+//     res.send = (body) => {
+//       redisSet(reqPath, 60, JSON.stringify(body))
+//         .catch((err) => {
+//           console.log(err);
+//         });
+//       res.sendResponse(body);
+//     }
+//     next();
+//   }
+// }
 
 app.use('/:id', express.static(`${__dirname}/../client/dist`));
 // app.use(morgan('dev'));

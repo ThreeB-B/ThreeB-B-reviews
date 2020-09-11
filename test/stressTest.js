@@ -3,7 +3,7 @@ import { check } from 'k6';
 
 export let options = {
   vus: 30,
-  duration: '600s'
+  duration: '30s'
 }
 
 const URL = `http://localhost:3004/reviews/`

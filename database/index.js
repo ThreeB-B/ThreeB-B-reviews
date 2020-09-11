@@ -4,7 +4,7 @@ const { username, password } = require('./config');
 const db = new Pool({
   user: username,
   password: password,
-  host: process.env.DB_URL,
+  host: 'localhost',
   database: '3bb-reviews',
   port: '5432'
 });

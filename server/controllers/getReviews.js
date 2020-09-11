@@ -8,7 +8,7 @@ module.exports.getReviews = async (room_id) => {
       as r INNER JOIN users as u ON u.id = r.user_id WHERE r.room_id = ${room_id}`);
 
     reviews = { room_id: room_id, reviews: results.rows };
-  } catch {
+  } catch (err) {
     console.log(err);
   }
 

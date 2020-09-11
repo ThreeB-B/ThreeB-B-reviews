@@ -5,7 +5,8 @@ import ReviewRender from './ReviewRender.jsx';
 import RatingStar from './RatingStar.jsx'
 import React from 'react';
 
-const id = window.location.pathname;
+let id = window.location.pathname.split('/');
+id = id[id.length - 1];
 
 import style from '../../dist/style.css';
 class App extends React.Component {
@@ -28,7 +29,7 @@ class App extends React.Component {
 
   // fetch data while enter the website
   componentDidMount() {
-    axios.get(`/reviews${id}`)
+    axios.get(`/reviews/${id}`)
       .then(({ data }) => {
         const { reviews } = data;
 

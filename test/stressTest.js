@@ -3,10 +3,10 @@ import { check } from 'k6';
 
 export let options = {
   vus: 30,
-  duration: '30s'
+  duration: '600s'
 }
 
-const URL = `http://localhost:3004/reviews/`
+const URL = `http://3bb-reviews-classic-1100595086.us-west-2.elb.amazonaws.com/reviews/`
 
 export default function() {
   const highPopIndex = Math.ceil((Math.random() * 10))
@@ -18,7 +18,7 @@ export default function() {
     id = Math.floor((Math.random() * (10 - 2) + 2) * 1000000);
   }
 
-  const REQ_URL = URL + id;
+  const REQ_URL = URL + 1000000;
 
   let res = http.get(REQ_URL);
 

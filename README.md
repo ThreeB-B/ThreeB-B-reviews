@@ -1,4 +1,4 @@
-### ThreeB&&B Reviews Component
+# ThreeB&&B Reviews Component
 
 Welcome to ThreeB&&B!  This page serves as the landing page for the reviews component of the ThreeB&&B app.  The reviews component is responsible for rendering user submitted reviews of the current room.  The original This particular fork of the original Hacker Home reviews component has a prototype back end built to handle a much higher amount of traffic.  The original back end wasn't very well optimized, so when the ThreeB&&B team took on the project we opted to rebuild the back ends of each of the services so that they'd be capable of handling production level traffic.
 

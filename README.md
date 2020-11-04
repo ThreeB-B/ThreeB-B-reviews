@@ -38,7 +38,7 @@ The original schema looked like this:
 While this data shape made it easy to quickly add and retrieve reviews for a room, it made it much more difficult to retrieve and update user information as that information was embedded and repeated in each review.  The data was also very uniform, so I had a suspicion that a SQL based DB would suit our data really well.
 
 With that in mind, I broke down the data and designed a new schema with a SQL database in mind.  The new schema was split into 3 tables:
-![](https://imgur.com/a/jHxPSG7)
+![](https://i.imgur.com/gEPFvJl.png)
 
 The room data is split into its own table, reviews data is in another, and user data is in a third table.  The big advantage is that it allows us to manage user data independently of the reviews, which would make processing updates to user names and profile pictures significantly easier.
 

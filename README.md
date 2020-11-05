@@ -44,7 +44,22 @@ The room data is split into its own table, reviews data is in another, and user 
 
 So, with the schema laid out, I did some research on good database options for both the original document based schema and the SQL schema.  I opted to go with Arango to benchmark the document based schema as is a multi-modal database which could be beneficial in the long run.  For the SQL schema I opted to use Postgres as it offered great options for scaling and that was a concern for this project.
 
+#### Database Benchmarking
+Once I had an idea of which databases I wanted to benchmark, I seeded them with 10mil primary records (rooms) and ~170mil secondary records (1-21 reviews per room) so that we could properly benchmark performance across a broad range of indexes.
 
+**Postgres**
+As the service has only got a single API I was able to utilize a single query: _SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u ON u.id = r.user_id WHERE r.room_id = ${room_id}_
+In addition to the above schema, the "room_id" column of the reviews table was also indexed, as we would be utilizing it for our query.
+
+PLACEHOLDER RESUME HERE
+
+#### Final Database Choice
+
+## Server Optimization and Scaling the Service
+
+#### Local Stress Testing
+
+## Final Deployment Stress Testing
 
 ## How to run this projects
 

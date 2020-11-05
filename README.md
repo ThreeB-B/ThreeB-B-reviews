@@ -48,10 +48,78 @@ So, with the schema laid out, I did some research on good database options for b
 Once I had an idea of which databases I wanted to benchmark, I seeded them with 10mil primary records (rooms) and ~170mil secondary records (1-21 reviews per room) so that we could properly benchmark performance across a broad range of indexes.
 
 **Postgres**
-As the service has only got a single API I was able to utilize a single query: _SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u ON u.id = r.user_id WHERE r.room_id = ${room_id}_
-In addition to the above schema, the "room_id" column of the reviews table was also indexed, as we would be utilizing it for our query.
+As the service has only got a single API I was able to utilize a single query: 
+> SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u ON u.id = r.user_id WHERE r.room_id = ${room_id}
 
-PLACEHOLDER RESUME HERE
+In addition to the above schema, the "room_id" column of the reviews table was also indexed, as I would be utilizing it for my query.
+
+I performed 3 rounds of tests targeting indexes in the first 10% of our data set, the middle of our data set, and finally the last 10% of our data set.  In each round of tests I performed 9 queries spread out across a couple of room ids.
+
+Initial 10%:
+```Javascript
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 100784;
+1: Time: 46.075 ms
+2: Time: 8.401 ms
+3: Time: 3.065 ms
+ 
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 1007082;
+1: Time: 3.143 ms
+2: Time: 2.135 ms
+3: Time: 0.406 ms
+ 
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 2;
+1: Time: 5.197 ms
+2: Time: 6.931 ms
+3: Time: 5.772 ms
+```
+
+Middle:
+```Javascript
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 5555555;
+1: Time: 5.783 ms
+2: Time: 0.429 ms
+3: Time: 0.379 ms
+ 
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 5555510;
+1: Time: 2.763 ms
+2: Time: 0.726 ms
+3: Time: 0.747 ms
+ 
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 4545410;
+1: Time: 3.501 ms
+2: Time: 0.773 ms
+3: Time: 0.621 ms
+```
+
+Final 10%:
+```Javascript
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 9784999;
+ 
+1: Time: 23.597 ms
+2: Time: 0.449 ms
+3: Time: 5.667 ms
+4: Time: 0.631 ms
+5: Time: 0.379 ms
+6: Time: 2.265 ms
+ 
+3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
+ON u.id = r.user_id WHERE r.room_id = 9784990;
+ 
+1: Time: 2.197 ms
+2: Time: 2.251 ms
+3: Time: 0.505 ms
+```
+
+Overall the queries were pretty consistent.  There were two outliers, one query at 46ms and one at 23ms.  Outside of that, we were seeing an averaged non-cached query time of ~4-5ms and an average cached query time of ~0.55ms.
+
+
 
 #### Final Database Choice
 

@@ -171,13 +171,17 @@ Final 10%
 3: Time: 0.29ms
 ```
 
-There were two big takeaways from the Arango tests.  The first was that there was a much bigger variance in non-cached query speeds.  I was seeing anywhere from 2.64ms - 41.95ms with an average of 
-
-PLACEHOLDER CONTINUE HERE
+There were two big takeaways from the Arango tests.  The first was that there was a much bigger variance in non-cached query speeds.  I was seeing anywhere from 2.64ms - 41.95ms with an average of 14ms which was roughly 300% slower than Postgres was with a much wider variance in query speeds.  The one area it did ourpace Postgres was with cached queries which averaged ~0.3ms as opposed to Postgres' ~0.55ms.
 
 #### Final Database Choice
+Ultimately, Postgres fit the service's needs better than Arango did.  Normalizing our data shape to separate room and user data from our revews data opens up options for more efficient access to that data down the road.  More importantly though, even after normalizing the data Postgres outperformed Arango in non-cached queries.  Even though Arango performed better with cached queries, I'm planning on implementing a redis cache on the service which will handle all of our cached queries anyway.  While Postgres is a little clunkier to scale than Arango is, streaming replication would still be an excellent option if we need it.
+
+Overall, because of the faster query speeds and increased access to user data, Postgres was a better fit for the service.
 
 ## Server Optimization and Scaling the Service
+With out Database decided
+
+PLACEHOLD RESUME HERE
 
 #### Local Stress Testing
 
@@ -193,8 +197,8 @@ PLACEHOLDER CONTINUE HERE
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+1. [Requirements](#Requirements)
+1. [Development](#Development)
 
 ## Usage
 

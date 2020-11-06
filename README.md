@@ -119,7 +119,61 @@ ON u.id = r.user_id WHERE r.room_id = 9784990;
 
 Overall the queries were pretty consistent.  There were two outliers, one query at 46ms and one at 23ms.  Outside of that, we were seeing an averaged non-cached query time of ~4-5ms and an average cached query time of ~0.55ms.
 
+**ArangoDB**
+Our schema for Arango is simpler as we're leveraging its capability as a document store, which helps simplify my query.  Just like with Postgres, I've indexed the room_id as that's going to be what our query is based off of.
 
+The query I'll be using is:
+> FOR doc IN reviews  FILTER doc.room_id == ${room_id}  RETURN doc
+
+The tests are structured the same as the Postgres tests where I'll be querying data in the first 10%, middle, and final 10% of my data set.  The only difference is that I opted to run 6 queries per section instead of the 9 I ran with Postgres.
+
+Initial 10%
+```Javascript
+127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 999999  RETURN doc`, {}, {colors: false} );
+1: Time: 2.87ms
+2: Time: 0.28ms
+3: Time: 0.29ms
+ 
+127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 999  RETURN doc`, {}, {colors: false} );
+ 
+1: Time: 13.91ms
+2: Time: 0.31ms
+3: Time: 0.46ms
+```
+
+Middle
+```Javascript
+127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 4999999  RETURN doc`, {}, {colors: false} );
+ 
+1: Time: 5.03ms
+2: Time: 0.29ms
+3: Time: 0.30ms
+ 
+127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 5999999  RETURN doc`, {}, {colors: false} );
+ 
+1: Time: 20.08ms
+2: Time: 0.29ms
+3: Time: 0.31ms
+```
+
+Final 10%
+```Javascript
+127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 9999999  RETURN doc`, {}, {colors: false} );
+ 
+1: Time: 11.54ms
+2: Time: 0.28ms
+3: Time: 2.64ms
+ 
+127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 9599999  RETURN doc`, {}, {colors: false} );
+ 
+1: Time: 41.95ms
+2: Time: 0.29ms
+3: Time: 0.29ms
+```
+
+There were two big takeaways from the Arango tests.  The first was that there was a much bigger variance in non-cached query speeds.  I was seeing anywhere from 2.64ms - 41.95ms with an average of 
+
+PLACEHOLDER CONTINUE HERE
 
 #### Final Database Choice
 

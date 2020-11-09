@@ -179,13 +179,23 @@ Ultimately, Postgres fit the service's needs better than Arango did.  Normalizin
 Overall, because of the faster query speeds and increased access to user data, Postgres was a better fit for the service.
 
 ## Server Optimization and Scaling the Service
-With out Database decided
+With my database decided, I was in a great position to start designing the back end.  The basic plan was to build out the back end with horizontal scaling in mind.
 
-PLACEHOLD RESUME HERE
+<INSERT DIAGRAM>
+  
+As you can see from the diagram, the basic plan is to scale the service servers before scaling the database.  My hope is that a single database instance will keep up with the traffic of at least a couple of service instances.  The service instances will be behind a load balancer, and will have a shared redis cache between the load balancer and service instances to help serve cached data.  I'm planning to deploy using **AWS**, with the service, database, and redis instances hosted on **EC2 t2.micro** instances.  That'll allow me to use the **AWS load balancer** for a quick, easy load balancer solution
 
 #### Local Stress Testing
+With this basic structure in mind, I started with getting the service connected to the new Postgres database and run some local stress tests to see if there were any bottlenecks in the server code I could address before deploying to AWS.  Local stress testing was performed with **K6** and the **New Relic** dashboard to monitor service performance all the way through deployment.
+
+The initial stress tests were indicating the service could handle ~600 requests per second locally.  I was able to make some server optimizations, cutting out unnecessary middleware and streamlining route handling and was able to bump that up to ~1050 requests per second.  That was encouraging, as I was sure that I'd lose some performance moving the service to the t2.micro instances, but felt that with horizontal scaling I should be able to reach my 1000 requests per second goal while deployed.
 
 ## Final Deployment Stress Testing
+The next step was fairly straight forward, deploy to AWS!  Once the service was up on the EC2 instance, I made one final change the service's code, plugging in the **redis** cache as middleware on my GET routes so that repeat traffic could be served without taxing the server or database.  With the service, cache, and database now deployed to AWS, it was time for another round of stress testing.  To handle my cloud based stress testing, I switched from K6 to **loaderio**.  The loaderio stress test was configured to consider any request that took longer than 2s to receive a response a failure, and an overall failed test if there was more than a 1% failure rate on the requests.  With that set, it was time to establish a base line for a single service instance.
+
+With a single service running I was seeing about 600 request per second before the service hit a bottleneck.  Performance data on the database indicated that it wasn't being taxed too heavily at this point, so I believed I'd be able to break through my 1000 request per second goal by adding another service instance.  I began scaling the service, initially with 2 service instances running, then 4, then 6.
+
+The sweet spot was 4 instances, providing a final performance of **2000 requests per second**.  With a single instance performance of 600 requests per second that could be quickly scaled to handle spikes in traffic up to 2000 requests per second without degradation of service for our users, my work on the project was complete.  Not only was I able to meet my goal of 1000 requests per second, but I was able to provide a back end that could handle twice that much traffic, all while being capable of scaling back down as traffic decreases to minimize operation costs.
 
 ## How to run this projects
 

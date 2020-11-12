@@ -51,7 +51,7 @@ So, with the schema laid out, I did some research on good database options for b
 #### Database Benchmarking
 Once I had an idea of which databases I wanted to benchmark, I seeded them with 10mil primary records (rooms) and ~170mil secondary records (1-21 reviews per room) so that we could properly benchmark performance across a broad range of indexes.
 
-**Postgres**
+#### Postgres
 As the service has only got a single API I was able to utilize a single query: 
 > SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u ON u.id = r.user_id WHERE r.room_id = ${room_id}
 
@@ -123,7 +123,7 @@ ON u.id = r.user_id WHERE r.room_id = 9784990;
 
 Overall the queries were pretty consistent.  There were two outliers, one query at 46ms and one at 23ms.  Outside of that, we were seeing an averaged non-cached query time of ~4-5ms and an average cached query time of ~0.55ms.
 
-**ArangoDB**
+#### ArangoDB
 Our schema for Arango is simpler as we're leveraging its capability as a document store, which helps simplify my query.  Just like with Postgres, I've indexed the room_id as that's going to be what our query is based off of.
 
 The query I'll be using is:

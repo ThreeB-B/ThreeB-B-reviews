@@ -203,10 +203,6 @@ The sweet spot was 4 instances, providing a final performance of **2000 requests
 
 ## How to run this projects
 
-```sh
-
-```
-
 
 ## Table of Contents
 

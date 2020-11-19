@@ -1,4 +1,10 @@
-# ThreeB&&B Reviews Component
+# ThreeB&&B Reviews Service
+
+Welcome to the Reviews service of the ThreeB&&B App!  Let's start with a brief overview of what ThreeB&&B is, then we can dive into talking about the reviews service itself.
+
+ThreeB&&B is an open source room reservation web app designed with service oriented architecture in mind.  ThreeB&&B and its services are built off of legacy code provided from the [Hacker Home](https://github.com/hacker-home) project.
+
+The ThreeB&&B Reviews service utilizes the legacy code base from the [Hacker Home Reviews Service](https://github.com/hacker-home/Airbnb-reviews) to provide a stand alone reviews component.  
 
 <!--
 Welcome to ThreeB&&B Reviews!  This page serves as the landing page for the reviews component of the ThreeB&&B app.  The reviews component was derived from the open source Hacker Home reviews component.  While the original component provided the React component I needed, I found that the back end didn't meet my performance needs.  It was only capable of roughly **400 request per second** once deployed, which meant it was going to struggle to keep up with spikes in traffic resulting in long load times or timed out requests from our users.  Not exactly the user experience I wanted to deliver.  So, I decided to review the back end of the service and find a way to optimize the performance with a goal of the service being able to handle **1000 requests per second**.  I also wanted to try to design the back end in a way that would allow it to be scaled horizontally so that when traffic slowed we could scale back deployment to reduce operating costs.

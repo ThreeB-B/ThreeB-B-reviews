@@ -32,13 +32,15 @@ If you got your TL:DR itch scratched by the overview, then thank you for taking 
   
 
 # How I did it
-[^Back to top](#table-of-contents)
+<sub>[^Back to top](#table-of-contents)</sub>
 
 For the reviews component, there were two main goals.
 1. Examine the original data shape and the database choice to determine if there was a more efficient option.
 2. Optimize the server code and design the back end so that it could be scaled horizontally with minimal issues.
 
 ## The Database
+[^Back to top](#table-of-contents)
+
 The legacy code was utilizing MongoDB with an object oriented data shape.  Each room had an object that contained the room ID and an array with all of the reviews stored inside.
 
 The original schema looked like this:

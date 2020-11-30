@@ -32,6 +32,7 @@ If you got your TL:DR itch scratched by the overview, then thank you for taking 
   
 
 # How I did it
+[^Back to top](#table-of-contents)
 
 For the reviews component, there were two main goals.
 1. Examine the original data shape and the database choice to determine if there was a more efficient option.
@@ -147,6 +148,7 @@ ON u.id = r.user_id WHERE r.room_id = 9784990;
 Overall the queries were pretty consistent.  There were two outliers, one query at 46ms and one at 23ms.  Outside of that, we were seeing an averaged non-cached query time of ~4-5ms and an average cached query time of ~0.55ms.
 
 #### ArangoDB
+[^Back to top](#table-of-contents)
 Our schema for Arango is simpler as we're leveraging its capability as a document store, which helps simplify my query.  Just like with Postgres, I've indexed the room_id as that's going to be what our query is based off of.
 
 The query I'll be using is:

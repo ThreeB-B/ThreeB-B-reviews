@@ -2,7 +2,7 @@
 
 Welcome to the Reviews service of the ThreeB&&B App!  This project is a little different from anything else on my GitHub as it was back-end focused, so a lot of the work isn't really represented in the GitHub repo.  It's also based on a legacy code base, so my work was largely confined to the database/server directories.  If you're interested in checking out my front end work, take a look at [Halvsy Gallery](https://github.com/teamchupacabramcthundercats/Halvsy-Gallery)!  A stand alone gallery service I designed from the ground up.  Now... on to ThreeB&&B Reviews!
 
-Let's start with a brief overview of what ThreeB&&B is, then we can dive into talking about the reviews service itself.
+Let's start with a brief overview of what ThreeB&&B (pronounced ThreeB-and-B, because programming puns are hilarious) is, then we can dive into talking about the reviews service itself.
 
 ThreeB&&B is an open source room reservation web app designed with service oriented architecture in mind.  ThreeB&&B and its services are built off of legacy code provided from the [Hacker Home](https://github.com/hacker-home) project.
 

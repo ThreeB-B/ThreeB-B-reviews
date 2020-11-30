@@ -19,15 +19,16 @@ So... I gave a brief overview above that covers the end results, but how did I a
 If you got your TL:DR itch scratched by the overview, then thank you for taking the time to check out my work.  I hope you found it useful!
 
 # Table of Contents
-1. [The Database](#The Database)
-  1. [Database Benchmarking](#Database Benchmarking)
-    1. [Postgres](#Postgres)
-    2. [ArangoDB](#ArangoDB)
-  2. [Final Database Choice](#Final Database Choice)
-2. [Server Optimization and Scaling](#Server Optimization and Scaling the Service)
-  1. [Local Stress Testing](#Local Stress Testing)
-  2. [Final Deployment Stress Testing](#Final Deployment Stress Testing)
-3. [Results](#Results)
+[How I did it](#how-i-did-it)
+  * [The Database](#the-database)
+    + [Database Benchmarking](#database-benchmarking)
+      - [Postgres](#postgres)
+      - [ArangoDB](#arangodb)
+      - [Final Database Choice](#final-database-choice)
+  * [Server Optimization and Scaling the Service](#server-optimization-and-scaling-the-service)
+    + [Local Stress Testing](#local-stress-testing)
+    + [Final Deployment Stress Testing](#final-deployment-stress-testing)
+  * [Results](#results)
   
 
 # How I did it

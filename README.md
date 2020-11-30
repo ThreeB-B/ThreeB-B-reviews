@@ -10,6 +10,10 @@ The ThreeB&&B Reviews service utilizes the legacy code base from the [Hacker Hom
 
 Thus, the ThreeB&&B Reviews component was born!  The original Hacker Home front end with a slick, new, streamlined back-end.  After a bit of performance testing, I swapped out the MongoDB database for a Postgres database.  Postgres had better query speeds and allowed me to reshape the data so user data was more accessible.  The server had some unnecessary middleware removed and its routes optimized to reduce the amount of work being performed on each request.  From there I deployed the service to AWS utilizing EC2 instances for the database and service server.  The service's server image was then configured so that I could launch as many new instances of the server as I needed to help distribute traffic.  A redis cache was connected to the service between the load balancer and server which improved performance on repeat requests.  Overall, with all the changes I was able to make I was able to produce a back end capable of processing 2000 requests per second.  That was **double my original goal** and **500% faster than the legacy back end**.
 
+Want to see all of that in a fancy graph?  Me too!
+
+![Benchmark Graph](https://github-resources.s3-us-west-2.amazonaws.com/3bb-reviews-benchmark.png)
+
 So... I gave a brief overview above that covers the end results, but how did I accomplish that?  What work went into those decisions?  If you'd like to find out more, just keep on scrolling down!  I go into detail about my decision making process and the metrics I used to inform those decisions.
 
 If you got your TL:DR itch scratched by the overview, then thank you for taking the time to check out my work.  I hope you found it useful!

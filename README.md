@@ -211,6 +211,7 @@ Ultimately, Postgres fit the service's needs better than Arango did.  Normalizin
 
 Overall, because of the faster query speeds and increased access to user data, Postgres was a better fit for the service.
 
+<sub>[^Back to top](#table-of-contents)</sub>
 ## Server Optimization and Scaling the Service
 With my database decided, I was in a great position to start designing the back end.  The basic plan was to build out the back end with horizontal scaling in mind.
 
@@ -230,9 +231,9 @@ The next step was fairly straight forward, deploy to AWS!  Once the service was 
 
 With a single service running I was seeing about 600 request per second before the service hit a bottleneck.  Performance data on the database indicated that it wasn't being taxed too heavily at this point, so I believed I'd be able to break through my 1000 request per second goal by adding another service instance.  I began scaling the service, initially with 2 service instances running, then 4, then 6.
 
+The sweet spot was 4 instances, providing a final performance of **2000 requests per second**.  With a single instance performance of 600 requests per second that could be quickly scaled to handle spikes in traffic up to 2000 requests per second without degradation of service for our users, my work on the project was complete.
+
 <sub>[^Back to top](#table-of-contents)</sub>
 ## Results
 
-The sweet spot was 4 instances, providing a final performance of **2000 requests per second**.  With a single instance performance of 600 requests per second that could be quickly scaled to handle spikes in traffic up to 2000 requests per second without degradation of service for our users, my work on the project was complete.  Not only was I able to meet my goal of 1000 requests per second, but I was able to provide a back end that could handle twice that much traffic, all while being capable of scaling back down as traffic decreases to minimize operation costs.
-
-
+After a lot of work benchmarking and testing databases and back-end configuration, I was ultimately able to produce a back end for the service which was almost 500% faster than the legacy back end.  Not only that, but it's able to achieve that performance while allowing me to scale performance down as traffic decreases, allowing me to reduce operating costs for the service.  Not only that, but the final performance figure of 2000 requests per second was **double** my initial target of 1000 requests per second.  That means more users able to interact with our app while limiting costs during slow periods without impacting the quality of our service.  Overall, I was really happy with the results I was able to achieve.

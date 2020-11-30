@@ -195,7 +195,7 @@ Overall, because of the faster query speeds and increased access to user data, P
 ## Server Optimization and Scaling the Service
 With my database decided, I was in a great position to start designing the back end.  The basic plan was to build out the back end with horizontal scaling in mind.
 
-<INSERT DIAGRAM>
+![Back-end Architecture Diagram](https://github-resources.s3-us-west-2.amazonaws.com/3bb-reviews-backend-diagram.png)
   
 As you can see from the diagram, the basic plan is to scale the service servers before scaling the database.  My hope is that a single database instance will keep up with the traffic of at least a couple of service instances.  The service instances will be behind a load balancer, and will have a shared redis cache between the load balancer and service instances to help serve cached data.  I'm planning to deploy using **AWS**, with the service, database, and redis instances hosted on **EC2 t2.micro** instances.  That'll allow me to use the **AWS load balancer** for a quick, easy load balancer solution
 

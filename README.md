@@ -2,19 +2,22 @@
 
 Welcome to the Reviews service of the ThreeB&&B App!  This project is a little different from anything else on my GitHub as it was back-end focused, so a lot of the work isn't really represented in the GitHub repo.  It's also based on a legacy code base, so my work was largely confined to the database/server directories.  If you're interested in checking out my front end work, take a look at [Halvsy Gallery](https://github.com/teamchupacabramcthundercats/Halvsy-Gallery)!  A stand alone gallery service I designed from the ground up.
 
-Let's start with a brief overview of what ThreeB&&B  is, then we can dive into talking about the reviews service itself.
 
 ThreeB&&B, pronounced ThreeB-and-B (*because software engineers are hilarious*) is an open source room reservation web app designed with service oriented architecture in mind.  ThreeB&&B and its services are built off of legacy code provided from the [Hacker Home](https://github.com/hacker-home) project.
 
+
 The ThreeB&&B Reviews service utilizes the legacy code base from the [Hacker Home Reviews Service](https://github.com/hacker-home/Airbnb-reviews) to provide a stand alone reviews component for the ThreeB&&B app.  The front end of the service met my needs well enough, but I was concerned with how robust the back end was.  It was only capable of roughly **400 request per second** once deployed, which meant it was going to struggle to keep up with spikes in traffic resulting in long load times or timed out requests from our users.  Not exactly the user experience I wanted to deliver.  So, I decided to review the back end of the service and find a way to optimize the performance with a goal of the service being able to handle **1000 requests per second**.  I also wanted to try to design the back end in a way that would allow it to be scaled horizontally so that could not only ramp up to handle spikes in traffic, but could also scale down to reduce operating costs when traffic slowed.
 
+
 Thus, the ThreeB&&B Reviews component was born!  The original Hacker Home Reviews front end with a slick, new, streamlined back-end.  After a bit of performance testing, I replaced the original MongoDB database for a Postgres database.  Postgres had better query speeds and allowed me to reshape the data so user data was more accessible.  The server had some unnecessary middleware removed and its routes optimized to reduce the amount of work being performed on each request.  From there I deployed the service to AWS utilizing EC2 instances for the database and service server.  The service's server image was then configured so that I could launch as many new instances of the server as I needed to help distribute traffic.  A redis cache was connected to the service between the load balancer and server which improved performance on repeat requests.  Overall, with all the changes I was able to make I was able to produce a back end capable of processing 2000 requests per second.  That was **double my original goal** and **500% faster than the legacy back end**.
+
 
 Want to see all of that in a fancy graph?  Me too!
 
 ![Benchmark Graph](https://github-resources.s3-us-west-2.amazonaws.com/3bb-reviews-benchmark.png)
 
 So... I'm sure you're wondering: Is that everything?  Heck no it's not, that was just an overview!  If you scroll just a little further down, I go over the process I utilized to design and implement the new back end.  If you're not interested in the technical jargon and were content with the overview, then I'd just like to say thank you for taking the time to check out the work I did on the ThreeB&&B Reviews service.  I hope you'll take some time to check out my other work as well.
+
 
 # Table of Contents
 * [The Database](#the-database)

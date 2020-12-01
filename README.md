@@ -240,3 +240,9 @@ The sweet spot was 4 instances, providing a final performance of **2000 requests
 ## Results
 
 After a lot of work benchmarking and testing databases and back-end configuration, I was ultimately able to produce a back end for the service which was almost 500% faster than the legacy back end.  Not only that, but it's able to achieve that performance while allowing me to scale performance down as traffic decreases, allowing me to reduce operating costs for the service.  Not only that, but the final performance figure of 2000 requests per second was **double** my initial target of 1000 requests per second.  That means more users able to interact with our app while limiting costs during slow periods without impacting the quality of our service.  Overall, I was really happy with the results I was able to achieve.
+
+Once more, thank you for taking the time to look through my work.  As I mentioned way up at the top of the readme, if you'd like to see some of my front end work, check out [Halvsy Gallery](https://github.com/teamchupacabramcthundercats/Halvsy-Gallery)!  Otherwise, I'm always looking to connect with people in the industry, so please don't hesitate to reach out on LinkedIn.
+
+<a href="https://www.linkedin.com/in/joelc/" target="_blank">
+  <img src="https://img.shields.io/badge/-JOEL%20CARPENTER-blue?style=for-the-badge&logo=Linkedin&logoColor=white"/>
+</a>

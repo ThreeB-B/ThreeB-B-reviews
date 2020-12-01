@@ -167,7 +167,9 @@ The query I'll be using is:
 
 The tests are structured the same as the Postgres tests where I'll be querying data in the first 10%, middle, and final 10% of my data set.  The only difference is that I opted to run 6 queries per section instead of the 9 I ran with Postgres.
 
-Initial 10%
+![Graph with initial ArangoDB query results](https://github-resources.s3-us-west-2.amazonaws.com/arango-queries-initial.png)
+
+<!--Initial 10%
 ```Javascript
 127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 999999  RETURN doc`, {}, {colors: false} );
 1: Time: 2.87ms
@@ -179,9 +181,11 @@ Initial 10%
 1: Time: 13.91ms
 2: Time: 0.31ms
 3: Time: 0.46ms
-```
+```-->
 
-Middle
+![Graph with middle ArangoDB query results](https://github-resources.s3-us-west-2.amazonaws.com/arango-queries-middle.png)
+
+<!--Middle
 ```Javascript
 127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 4999999  RETURN doc`, {}, {colors: false} );
  
@@ -194,9 +198,11 @@ Middle
 1: Time: 20.08ms
 2: Time: 0.29ms
 3: Time: 0.31ms
-```
+```-->
 
-Final 10%
+![Graph with final ArangoDB query results](https://github-resources.s3-us-west-2.amazonaws.com/arango-queries-final.png)
+
+<!--Final 10%
 ```Javascript
 127.0.0.1:8529@reviews> db._profileQuery(` FOR doc IN reviews  FILTER doc.room_id == 9999999  RETURN doc`, {}, {colors: false} );
  
@@ -209,7 +215,7 @@ Final 10%
 1: Time: 41.95ms
 2: Time: 0.29ms
 3: Time: 0.29ms
-```
+```-->
 
 There were two big takeaways from the Arango tests.  The first was that there was a much bigger variance in non-cached query speeds.  I was seeing anywhere from 2.64ms - 41.95ms with an average of 14ms which was roughly 300% slower than Postgres was with a much wider variance in query speeds.  The one area it did outpace Postgres was with cached queries which averaged ~0.3ms as opposed to Postgres' ~0.55ms.
 

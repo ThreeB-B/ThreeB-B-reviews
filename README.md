@@ -88,7 +88,9 @@ In addition to the above schema, the "room_id" column of the reviews table was a
 
 I performed 3 rounds of tests targeting indexes in the first 10% of our data set, the middle of our data set, and finally the last 10% of our data set.  In each round of tests I performed 9 queries spread out across a couple of room ids.
 
-Initial 10%:
+![pg-queries-initial](https://github-resources.s3-us-west-2.amazonaws.com/pg-queries-initial.png)
+
+<!--Initial 10%:
 ```Javascript
 3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
 ON u.id = r.user_id WHERE r.room_id = 100784;
@@ -107,7 +109,7 @@ ON u.id = r.user_id WHERE r.room_id = 2;
 1: Time: 5.197 ms
 2: Time: 6.931 ms
 3: Time: 5.772 ms
-```
+```-->
 
 Middle:
 ```Javascript

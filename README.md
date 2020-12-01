@@ -236,7 +236,7 @@ As you can see from the diagram, the basic plan is to scale the service servers 
 
 <sub>[^Back to top](#table-of-contents)</sub>
 ### Local Stress Testing
-With this basic structure in mind, I started with getting the service connected to the new Postgres database and run some local stress tests to see if there were any bottlenecks in the server code I could address before deploying to AWS.  Local stress testing was performed with **K6** and the **New Relic** dashboard to monitor service performance all the way through deployment.
+With this basic structure in mind, I started with getting the service connected to the new Postgres database and ran some local stress tests to see if there were any bottlenecks in the server code I could address before deploying to AWS.  Local stress testing was performed with **K6** and the **New Relic** dashboard to monitor service performance all the way through deployment.
 
 The initial stress tests were indicating the service could handle ~600 requests per second locally.  I was able to make some server optimizations, cutting out unnecessary middleware and streamlining route handling and was able to bump that up to ~1050 requests per second.  That was encouraging, as I was sure that I'd lose some performance moving the service to the t2.micro instances, but felt that with horizontal scaling I should be able to reach my 1000 requests per second goal while deployed.
 

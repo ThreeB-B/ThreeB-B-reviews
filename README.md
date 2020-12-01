@@ -111,7 +111,9 @@ ON u.id = r.user_id WHERE r.room_id = 2;
 3: Time: 5.772 ms
 ```-->
 
-Middle:
+![postgres-queries-middle](https://github-resources.s3-us-west-2.amazonaws.com/pg-queries-middle.png)
+
+<!--Middle:
 ```Javascript
 3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
 ON u.id = r.user_id WHERE r.room_id = 5555555;
@@ -130,9 +132,11 @@ ON u.id = r.user_id WHERE r.room_id = 4545410;
 1: Time: 3.501 ms
 2: Time: 0.773 ms
 3: Time: 0.621 ms
-```
+```-->
 
-Final 10%:
+![postgres-queries-final](https://github-resources.s3-us-west-2.amazonaws.com/pg-queries-middle.png)
+
+<!--Final 10%:
 ```Javascript
 3bb-reviews=# SELECT u.name, u.profilepicnum as profilePicNum, r.* FROM reviews as r INNER JOIN users as u
 ON u.id = r.user_id WHERE r.room_id = 9784999;
@@ -150,7 +154,7 @@ ON u.id = r.user_id WHERE r.room_id = 9784990;
 1: Time: 2.197 ms
 2: Time: 2.251 ms
 3: Time: 0.505 ms
-```
+```-->
 
 Overall the queries were pretty consistent.  There were two outliers, one query at 46ms and one at 23ms.  Outside of that, we were seeing an averaged non-cached query time of ~4-5ms and an average cached query time of ~0.55ms.
 

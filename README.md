@@ -134,7 +134,7 @@ ON u.id = r.user_id WHERE r.room_id = 4545410;
 3: Time: 0.621 ms
 ```-->
 
-![postgres-queries-final](https://github-resources.s3-us-west-2.amazonaws.com/pg-queries-middle.png)
+![postgres-queries-final](https://github-resources.s3-us-west-2.amazonaws.com/pg-queries-final.png)
 
 <!--Final 10%:
 ```Javascript

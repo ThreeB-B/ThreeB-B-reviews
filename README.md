@@ -1,4 +1,4 @@
-# ThreeB&&B Reviews Service
+![ThreeB&&B Logo](https://github-resources.s3-us-west-2.amazonaws.com/3bb-logo.png)
 
 Welcome to the Reviews service of the ThreeB&&B App!  This project is a little different from anything else on my GitHub as it was back-end focused, so a lot of the work isn't really represented in the GitHub repo.  It's also based on a legacy code base, so my work was largely confined to the database/server directories.  If you're interested in checking out my front end work, take a look at [Halvsy Gallery](https://github.com/teamchupacabramcthundercats/Halvsy-Gallery)!  A stand alone gallery service I designed from the ground up.
 

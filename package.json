@@ -16,7 +16,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "casual": "^1.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "morgan": "^1.10.0",
     "newrelic": "^6.13.0",
     "pg": "^8.3.3",
